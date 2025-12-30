@@ -449,3 +449,29 @@
             Since GitHub Pages is static hosting, forms work best through a free form backend (Netlify Forms, Formspree, etc.).
           </p>
           <a class="btn btn-outline" href="#top">Back to top</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="foot">
+    © <span id="year"></span> Kalispell Valley Co. • Built in the Flathead Valley
+  </div>
+
+  <script>
+    // Parallax: background moves at a different speed than scroll.
+    // Smaller multiplier = slower background movement.
+    const parallaxLayer = document.querySelector(".parallax");
+    const setParallax = () => {
+      const y = window.scrollY || 0;
+      const offset = Math.round(y * -0.18); // tweak: -0.12 to -0.25 feels good
+      document.documentElement.style.setProperty("--pY", offset + "px");
+    };
+    window.addEventListener("scroll", setParallax, { passive: true });
+    setParallax();
+
+    // Footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
