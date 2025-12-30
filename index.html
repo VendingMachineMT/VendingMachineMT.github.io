@@ -1,11 +1,451 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>My Website</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Local Kalispell Business</title>
+  <meta name="description" content="A local Kalispell, MT and Flathead Valley company. Reliable service and easy contact." />
+
+  <style>
+    :root{
+      --bg:#0b0f17;
+      --panel: rgba(255,255,255,.06);
+      --text:#e9eefc;
+      --muted: rgba(233,238,252,.72);
+      --line: rgba(255,255,255,.12);
+      --btn: rgba(233,238,252,.92);
+      --btnText:#0b0f17;
+      --shadow: 0 18px 55px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 1100px;
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--text);
+      background: radial-gradient(1200px 800px at 20% 0%, rgba(78,115,255,.22), transparent 55%),
+                  radial-gradient(1000px 700px at 90% 10%, rgba(0,207,255,.18), transparent 60%),
+                  var(--bg);
+      overflow-x:hidden;
+    }
+
+    /* Top nav */
+    .nav{
+      position:fixed;
+      top:0; left:0; right:0;
+      z-index:50;
+      background: linear-gradient(to bottom, rgba(11,15,23,.92), rgba(11,15,23,.55), transparent);
+      backdrop-filter: blur(8px);
+    }
+    .nav-inner{
+      max-width: var(--max);
+      margin:0 auto;
+      padding: 16px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:700;
+      letter-spacing:.3px;
+      text-transform: uppercase;
+      font-size: 13px;
+      color: rgba(233,238,252,.9);
+    }
+    .logo{
+      width:34px; height:34px;
+      border-radius: 10px;
+      background: linear-gradient(145deg, rgba(233,238,252,.18), rgba(233,238,252,.06));
+      border: 1px solid var(--line);
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      display:grid;
+      place-items:center;
+      font-weight:800;
+      font-size: 14px;
+    }
+    .nav-links{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .nav-links a{
+      color: rgba(233,238,252,.8);
+      text-decoration:none;
+      font-size: 14px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+    }
+    .nav-links a:hover{
+      border-color: var(--line);
+      background: rgba(255,255,255,.04);
+    }
+
+    /* Buttons */
+    .btn{
+      appearance:none;
+      border:0;
+      background: var(--btn);
+      color: var(--btnText);
+      font-weight: 700;
+      font-size: 14px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      cursor:pointer;
+      box-shadow: 0 14px 40px rgba(0,0,0,.28);
+      transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+    }
+    .btn:hover{ transform: translateY(-1px); }
+    .btn:active{ transform: translateY(0px); opacity:.9; }
+
+    .btn-outline{
+      background: transparent;
+      color: rgba(233,238,252,.92);
+      border: 1px solid var(--line);
+      box-shadow: none;
+    }
+
+    /* Hero with parallax background */
+    .hero{
+      min-height: 100vh;
+      display:grid;
+      place-items:center;
+      position:relative;
+      padding: 120px 18px 70px;
+    }
+
+    .parallax{
+      position:absolute;
+      inset:0;
+      z-index:0;
+      overflow:hidden;
+    }
+
+    /* The actual parallax layer */
+    .parallax::before{
+      content:"";
+      position:absolute;
+      inset:-12%;
+      background-image:
+        linear-gradient(to bottom, rgba(11,15,23,.70), rgba(11,15,23,.88)),
+        url("https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2400&q=80");
+      background-size: cover;
+      background-position: center;
+      transform: translate3d(0, var(--pY, 0px), 0) scale(1.05);
+      will-change: transform;
+      filter: contrast(1.05) saturate(1.05);
+    }
+
+    .hero-inner{
+      position:relative;
+      z-index:2;
+      width:100%;
+      max-width: var(--max);
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 26px;
+      align-items:center;
+    }
+
+    @media (max-width: 880px){
+      .hero-inner{ grid-template-columns: 1fr; }
+      .nav-links{ display:none; }
+    }
+
+    .card{
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card{
+      padding: 28px;
+    }
+
+    .kicker{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      font-weight: 700;
+      font-size: 13px;
+      color: rgba(233,238,252,.82);
+      letter-spacing:.2px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 12px;
+      margin-bottom: 14px;
+    }
+
+    h1{
+      margin: 0 0 12px;
+      line-height: 1.03;
+      font-size: clamp(34px, 4.4vw, 54px);
+      letter-spacing: -0.6px;
+    }
+
+    .lead{
+      margin: 0 0 18px;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--muted);
+      max-width: 62ch;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top: 18px;
+    }
+
+    .trust{
+      padding: 22px;
+      display:grid;
+      gap: 12px;
+    }
+    .trust h3{
+      margin:0;
+      font-size: 16px;
+      letter-spacing: .2px;
+    }
+    .trust ul{
+      margin:0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height:1.55;
+      font-size: 14px;
+    }
+
+    /* Sections */
+    section{
+      padding: 70px 18px;
+    }
+    .container{
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    .section-title{
+      margin:0 0 10px;
+      font-size: 26px;
+      letter-spacing: -0.3px;
+    }
+    .section-sub{
+      margin:0 0 24px;
+      color: var(--muted);
+      line-height:1.6;
+      max-width: 70ch;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    @media (max-width: 900px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+    .tile{
+      padding: 18px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      box-shadow: 0 10px 35px rgba(0,0,0,.25);
+      min-height: 120px;
+    }
+    .tile h4{
+      margin:0 0 8px;
+      font-size: 16px;
+    }
+    .tile p{
+      margin:0;
+      color: var(--muted);
+      line-height:1.55;
+      font-size: 14px;
+    }
+
+    /* Contact section */
+    .contact-wrap{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){
+      .contact-wrap{ grid-template-columns: 1fr; }
+    }
+    .contact-card{
+      padding: 22px;
+    }
+    .contact-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .contact-row:last-child{ border-bottom:0; }
+    .label{
+      color: rgba(233,238,252,.88);
+      font-weight:700;
+      font-size: 14px;
+    }
+    .value{
+      color: var(--muted);
+      font-size: 14px;
+      text-align:right;
+      word-break: break-word;
+    }
+
+    .foot{
+      padding: 22px 18px 40px;
+      color: rgba(233,238,252,.55);
+      text-align:center;
+      font-size: 13px;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>It works.</h1>
-  <p>This site is hosted for free on GitHub Pages.</p>
-</body>
-</html>
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <div class="logo">KV</div>
+        <div>Kalispell Valley Co.</div>
+      </div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#why">Why Us</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a class="btn btn-outline" href="#contact">Contact Us</a>
+    </div>
+  </div>
+
+  <header class="hero" id="top">
+    <div class="parallax" aria-hidden="true"></div>
+
+    <div class="hero-inner">
+      <div class="card hero-card">
+        <div class="kicker">Local • Reliable • Easy to Reach</div>
+        <h1>Run by local people in Kalispell, Montana and the Flathead Valley.</h1>
+        <p class="lead">
+          We’re a small business built for real customers, not corporate nonsense.
+          If you need help, you can actually reach us, and we actually show up.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn" href="#contact">Contact Us</a>
+          <a class="btn btn-outline" href="#about">Learn More</a>
+        </div>
+      </div>
+
+      <aside class="card trust">
+        <h3>Quick trust signals</h3>
+        <ul>
+          <li>Local operators serving the Flathead Valley</li>
+          <li>Fast responses and straightforward communication</li>
+          <li>Clear pricing and no surprises</li>
+        </ul>
+      </aside>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">About</h2>
+      <p class="section-sub">
+        This website exists for one reason: legitimacy and clarity. We’re local, we’re reachable, and we do what we say we’ll do.
+        As we grow, we’ll add service details and scheduling options here.
+      </p>
+
+      <div class="grid">
+        <div class="tile">
+          <h4>Local</h4>
+          <p>Based in Kalispell, serving the Flathead Valley. We’re not a call center. We’re right here.</p>
+        </div>
+        <div class="tile">
+          <h4>Simple</h4>
+          <p>No complicated “funnels.” Just clear info, and an easy way to contact us.</p>
+        </div>
+        <div class="tile">
+          <h4>Professional</h4>
+          <p>We show up on time, communicate clearly, and treat your time like it matters.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="why">
+    <div class="container">
+      <h2 class="section-title">Why people choose us</h2>
+      <p class="section-sub">
+        If you’ve ever dealt with flaky service or vague promises, you already know why this matters.
+      </p>
+
+      <div class="grid">
+        <div class="tile">
+          <h4>Fast contact</h4>
+          <p>Click the button, call, or email. No waiting days for a reply.</p>
+        </div>
+        <div class="tile">
+          <h4>Clear expectations</h4>
+          <p>We tell you what’s happening, what it costs, and what comes next.</p>
+        </div>
+        <div class="tile">
+          <h4>Built on reputation</h4>
+          <p>In a small community, your word matters. We protect ours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">Contact</h2>
+      <p class="section-sub">
+        Reach out and we’ll get back to you. If it’s urgent, calling is fastest.
+      </p>
+
+      <div class="contact-wrap">
+        <div class="card contact-card">
+          <div class="contact-row">
+            <div class="label">Phone</div>
+            <div class="value"><a style="color:inherit" href="tel:+14062109837">(406) 210-9837</a></div>
+          </div>
+          <div class="contact-row">
+            <div class="label">Email</div>
+            <div class="value"><a style="color:inherit" href="mailto:hello@yourdomain.com">hello@yourdomain.com</a></div>
+          </div>
+          <div class="contact-row">
+            <div class="label">Location</div>
+            <div class="value">Kalispell, MT • Flathead Valley</div>
+          </div>
+
+          <div style="margin-top:16px; display:flex; gap:12px; flex-wrap:wrap;">
+            <a class="btn" href="tel:+14062109837">Call Now</a>
+            <a class="btn btn-outline" href="mailto:hello@yourdomain.com">Email Us</a>
+          </div>
+        </div>
+
+        <div class="card contact-card">
+          <h3 style="margin:0 0 10px;">Message</h3>
+          <p style="margin:0 0 14px; color: var(--muted); line-height:1.6;">
+            If you want a simple contact form here, we can add one.
+            Since GitHub Pages is static hosting, forms work best through a free form backend (Netlify Forms, Formspree, etc.).
+          </p>
+          <a class="btn btn-outline" href="#top">Back to top</a>
