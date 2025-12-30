@@ -3,21 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Local Kalispell Business</title>
-  <meta name="description" content="A local Kalispell, MT and Flathead Valley company. Reliable service and easy contact." />
+  <title>Montana Vending</title>
+  <meta name="description" content="Montana Vending — locally run in Kalispell and serving the Flathead Valley. Snack and drink vending placement, restocking, and service." />
 
   <style>
     :root{
-      --bg:#0b0f17;
-      --panel: rgba(255,255,255,.06);
-      --text:#e9eefc;
-      --muted: rgba(233,238,252,.72);
-      --line: rgba(255,255,255,.12);
-      --btn: rgba(233,238,252,.92);
-      --btnText:#0b0f17;
-      --shadow: 0 18px 55px rgba(0,0,0,.35);
+      /* Brighter base + one continuous site gradient */
+      --bg1:#0b1230;
+      --bg2:#111b3a;
+      --bg3:#0f2b3a;
+
+      --text:#f2f6ff;
+      --muted: rgba(242,246,255,.76);
+      --line: rgba(255,255,255,.16);
+
+      /* Opaque glass look */
+      --glass: rgba(255,255,255,.16);
+      --glass2: rgba(255,255,255,.20);
+      --glassBorder: rgba(255,255,255,.22);
+
+      /* Updated accents: orange + light blue (no purple) */
+      --a1:#2dd4ff;  /* light blue */
+      --a2:#f97316;  /* orange */
+      --a3:#22c55e;  /* green */
+      --a4:#60a5fa;  /* extra sky blue */
+
+      --shadow: 0 22px 70px rgba(0,0,0,.38);
       --radius: 18px;
-      --max: 1100px;
+      --max: 1120px;
+
+      /* Parallax */
+      --pY: 0px;
+      --pY2: 0px;
+      --pYphotos: 0px;
+      --pYservices: 0px;
     }
 
     *{ box-sizing:border-box; }
@@ -26,104 +45,167 @@
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       color:var(--text);
-      background: radial-gradient(1200px 800px at 20% 0%, rgba(78,115,255,.22), transparent 55%),
-                  radial-gradient(1000px 700px at 90% 10%, rgba(0,207,255,.18), transparent 60%),
-                  var(--bg);
       overflow-x:hidden;
+
+      background:
+        radial-gradient(1200px 900px at 12% 0%, rgba(45,212,255,.26), transparent 62%),
+        radial-gradient(1200px 900px at 88% 6%, rgba(249,115,22,.24), transparent 60%),
+        radial-gradient(1100px 850px at 60% 95%, rgba(34,197,94,.20), transparent 62%),
+        linear-gradient(180deg, var(--bg1), var(--bg2) 45%, var(--bg3));
     }
 
-    /* Top nav */
+    a{ color: inherit; }
+
+    .grain{
+      pointer-events:none;
+      position:fixed;
+      inset:0;
+      z-index:3;
+      opacity:.07;
+      mix-blend-mode: overlay;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
+      background-size: 220px 220px;
+      animation: grainMove 10s steps(8) infinite;
+    }
+    @keyframes grainMove{
+      0%{ transform:translate(0,0); }
+      25%{ transform:translate(-6px, 4px); }
+      50%{ transform:translate(-2px, -6px); }
+      75%{ transform:translate(6px, 2px); }
+      100%{ transform:translate(0,0); }
+    }
+
+    /* SOLID TOP BAR: lighter + saturated orange/blue */
     .nav{
       position:fixed;
       top:0; left:0; right:0;
       z-index:50;
-      background: linear-gradient(to bottom, rgba(11,15,23,.92), rgba(11,15,23,.55), transparent);
-      backdrop-filter: blur(8px);
+      background:
+        linear-gradient(135deg, rgba(45,212,255,.42), rgba(249,115,22,.44)),
+        rgba(18,26,52,.78);
+      border-bottom: 1px solid rgba(255,255,255,.18);
+      box-shadow: 0 18px 55px rgba(0,0,0,.26);
+      backdrop-filter: blur(10px);
     }
     .nav-inner{
       max-width: var(--max);
       margin:0 auto;
-      padding: 16px 18px;
+      padding: 14px 18px;
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:14px;
     }
+
     .brand{
       display:flex;
       align-items:center;
       gap:12px;
-      font-weight:700;
-      letter-spacing:.3px;
+      font-weight:900;
+      letter-spacing:.45px;
       text-transform: uppercase;
       font-size: 13px;
-      color: rgba(233,238,252,.9);
+      user-select:none;
     }
+
     .logo{
-      width:34px; height:34px;
-      border-radius: 10px;
-      background: linear-gradient(145deg, rgba(233,238,252,.18), rgba(233,238,252,.06));
-      border: 1px solid var(--line);
-      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      width:42px; height:42px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.22);
+      background:
+        radial-gradient(18px 18px at 22% 30%, rgba(45,212,255,.55), transparent 65%),
+        radial-gradient(22px 22px at 80% 22%, rgba(249,115,22,.48), transparent 62%),
+        linear-gradient(145deg, rgba(255,255,255,.16), rgba(255,255,255,.06));
+      box-shadow: 0 16px 45px rgba(0,0,0,.22);
       display:grid;
       place-items:center;
-      font-weight:800;
-      font-size: 14px;
+      overflow:hidden;
+      position:relative;
+      flex: 0 0 auto;
     }
+    .logo::after{
+      content:"";
+      position:absolute;
+      inset:-60%;
+      background: conic-gradient(from 210deg, rgba(45,212,255,0), rgba(45,212,255,.40), rgba(249,115,22,.32), rgba(34,197,94,.18), rgba(45,212,255,0));
+      animation: spin 9s linear infinite;
+      opacity:.46;
+      filter: blur(12px);
+    }
+    @keyframes spin{ to{ transform: rotate(360deg); } }
+    .logo svg{ width:28px; height:28px; opacity:.98; position:relative; z-index:1; }
+
     .nav-links{
       display:flex;
       gap:10px;
       align-items:center;
     }
     .nav-links a{
-      color: rgba(233,238,252,.8);
+      color: rgba(242,246,255,.92);
       text-decoration:none;
       font-size: 14px;
       padding: 10px 12px;
       border-radius: 12px;
       border: 1px solid transparent;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
     }
     .nav-links a:hover{
-      border-color: var(--line);
-      background: rgba(255,255,255,.04);
+      border-color: rgba(255,255,255,.22);
+      background: rgba(255,255,255,.10);
+      transform: translateY(-1px);
     }
 
     /* Buttons */
     .btn{
       appearance:none;
       border:0;
-      background: var(--btn);
-      color: var(--btnText);
-      font-weight: 700;
+      background: linear-gradient(135deg, rgba(45,212,255,.98), rgba(249,115,22,.96));
+      color: #081021;
+      font-weight: 1000;
       font-size: 14px;
       padding: 12px 16px;
       border-radius: 14px;
       cursor:pointer;
-      box-shadow: 0 14px 40px rgba(0,0,0,.28);
-      transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+      box-shadow: 0 18px 55px rgba(0,0,0,.28);
+      transition: transform .15s ease, filter .15s ease, opacity .15s ease;
       text-decoration:none;
       display:inline-flex;
       align-items:center;
       justify-content:center;
       gap:10px;
+      position:relative;
+      overflow:hidden;
     }
-    .btn:hover{ transform: translateY(-1px); }
-    .btn:active{ transform: translateY(0px); opacity:.9; }
+    .btn::after{
+      content:"";
+      position:absolute;
+      inset:-60% -40%;
+      background: radial-gradient(circle at 30% 40%, rgba(255,255,255,.40), transparent 55%);
+      transform: translateX(-60%) rotate(12deg);
+      transition: transform .35s ease;
+      opacity:.60;
+    }
+    .btn:hover{ transform: translateY(-1px); filter: saturate(1.1) contrast(1.06); }
+    .btn:hover::after{ transform: translateX(0%) rotate(12deg); }
+    .btn:active{ transform: translateY(0px); opacity:.92; }
 
     .btn-outline{
-      background: transparent;
-      color: rgba(233,238,252,.92);
-      border: 1px solid var(--line);
+      background: rgba(255,255,255,.10);
+      color: rgba(242,246,255,.95);
+      border: 1px solid rgba(255,255,255,.22);
       box-shadow: none;
+      font-weight: 900;
     }
+    .btn-outline::after{ display:none; }
 
-    /* Hero with parallax background */
+    /* Hero */
     .hero{
       min-height: 100vh;
       display:grid;
       place-items:center;
       position:relative;
-      padding: 120px 18px 70px;
+      padding: 118px 18px 70px;
+      isolation:isolate;
     }
 
     .parallax{
@@ -133,19 +215,32 @@
       overflow:hidden;
     }
 
-    /* The actual parallax layer */
     .parallax::before{
       content:"";
       position:absolute;
-      inset:-12%;
+      inset:-18%;
       background-image:
-        linear-gradient(to bottom, rgba(11,15,23,.70), rgba(11,15,23,.88)),
-        url("https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2400&q=80");
+        linear-gradient(to bottom, rgba(11,18,48,.18), rgba(11,18,48,.72)),
+        url("https://commons.wikimedia.org/wiki/Special:FilePath/Lake%20McDonald%2C%20Glacier%20National%20Park.jpg?width=2400");
       background-size: cover;
       background-position: center;
-      transform: translate3d(0, var(--pY, 0px), 0) scale(1.05);
+      transform: translate3d(0, var(--pY), 0) scale(1.20);
       will-change: transform;
-      filter: contrast(1.05) saturate(1.05);
+      filter: contrast(1.08) saturate(1.14) brightness(1.07);
+    }
+    .parallax::after{
+      content:"";
+      position:absolute;
+      inset:-20%;
+      background:
+        radial-gradient(900px 600px at 20% 20%, rgba(45,212,255,.32), transparent 62%),
+        radial-gradient(900px 600px at 85% 15%, rgba(249,115,22,.30), transparent 60%),
+        radial-gradient(900px 600px at 60% 90%, rgba(34,197,94,.22), transparent 60%);
+      transform: translate3d(0, var(--pY2), 0) scale(1.12);
+      mix-blend-mode: screen;
+      opacity:.90;
+      will-change: transform;
+      pointer-events:none;
     }
 
     .hero-inner{
@@ -154,100 +249,126 @@
       width:100%;
       max-width: var(--max);
       display:grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap: 26px;
-      align-items:center;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 18px;
+      align-items:stretch;
     }
 
-    @media (max-width: 880px){
+    @media (max-width: 920px){
       .hero-inner{ grid-template-columns: 1fr; }
       .nav-links{ display:none; }
     }
 
     .card{
-      background: var(--panel);
-      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,.16));
+      border: 1px solid rgba(255,255,255,.24);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+      transform-style: preserve-3d;
+      transition: transform .20s ease, box-shadow .20s ease, border-color .20s ease;
+      backdrop-filter: blur(10px);
+      will-change: transform;
+    }
+    .card:hover{
+      border-color: rgba(255,255,255,.30);
+      box-shadow: 0 30px 90px rgba(0,0,0,.40);
     }
 
-    .hero-card{
-      padding: 28px;
-    }
+    .hero-card{ padding: 28px; }
+    .hero-side{ padding: 22px; display:flex; flex-direction:column; gap:14px; }
 
     .kicker{
       display:inline-flex;
       gap:10px;
       align-items:center;
-      font-weight: 700;
+      font-weight: 1000;
       font-size: 13px;
-      color: rgba(233,238,252,.82);
+      color: rgba(242,246,255,.92);
       letter-spacing:.2px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid var(--line);
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.22);
       border-radius: 999px;
       padding: 8px 12px;
       margin-bottom: 14px;
     }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: linear-gradient(135deg, var(--a1), var(--a2));
+      box-shadow: 0 0 22px rgba(45,212,255,.35);
+    }
 
     h1{
       margin: 0 0 12px;
-      line-height: 1.03;
-      font-size: clamp(34px, 4.4vw, 54px);
-      letter-spacing: -0.6px;
+      line-height: 1.02;
+      font-size: clamp(34px, 4.6vw, 56px);
+      letter-spacing: -0.8px;
     }
-
     .lead{
-      margin: 0 0 18px;
+      margin: 0 0 16px;
       font-size: 16px;
-      line-height: 1.6;
+      line-height: 1.65;
       color: var(--muted);
-      max-width: 62ch;
+      max-width: 68ch;
     }
-
     .hero-actions{
       display:flex;
       gap:12px;
       flex-wrap:wrap;
-      margin-top: 18px;
+      margin-top: 16px;
     }
 
-    .trust{
-      padding: 22px;
-      display:grid;
-      gap: 12px;
+    .stat{
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 16px;
+      background: rgba(255,255,255,.12);
+      position:relative;
+      overflow:hidden;
     }
-    .trust h3{
-      margin:0;
-      font-size: 16px;
-      letter-spacing: .2px;
+    .stat::after{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background:
+        radial-gradient(300px 220px at 25% 35%, rgba(45,212,255,.18), transparent 58%),
+        radial-gradient(300px 220px at 80% 30%, rgba(249,115,22,.16), transparent 58%);
+      opacity:.70;
+      pointer-events:none;
     }
-    .trust ul{
-      margin:0;
-      padding-left: 18px;
-      color: var(--muted);
-      line-height:1.55;
+    .stat b{
+      display:block;
       font-size: 14px;
+      letter-spacing:.2px;
+      margin-bottom: 6px;
+      position:relative;
+      z-index:1;
+    }
+    .stat span{
+      display:block;
+      color: rgba(242,246,255,.80);
+      font-size: 14px;
+      line-height:1.55;
+      position:relative;
+      z-index:1;
     }
 
-    /* Sections */
     section{
       padding: 70px 18px;
+      position:relative;
     }
-    .container{
-      max-width: var(--max);
-      margin: 0 auto;
-    }
+    .container{ max-width: var(--max); margin: 0 auto; position:relative; z-index:2; }
     .section-title{
       margin:0 0 10px;
-      font-size: 26px;
-      letter-spacing: -0.3px;
+      font-size: 28px;
+      letter-spacing: -0.4px;
     }
     .section-sub{
       margin:0 0 24px;
       color: var(--muted);
-      line-height:1.6;
-      max-width: 70ch;
+      line-height:1.65;
+      max-width: 78ch;
     }
 
     .grid{
@@ -255,83 +376,228 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
     }
-    @media (max-width: 900px){
+    @media (max-width: 950px){
       .grid{ grid-template-columns: 1fr; }
     }
+
     .tile{
       padding: 18px;
       border-radius: var(--radius);
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      box-shadow: 0 10px 35px rgba(0,0,0,.25);
-      min-height: 120px;
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.14);
+      box-shadow: 0 16px 50px rgba(0,0,0,.30);
+      min-height: 130px;
+      position:relative;
+      overflow:hidden;
+      transform-style: preserve-3d;
+      transition: transform .20s ease, border-color .20s ease, box-shadow .20s ease;
+      will-change: transform;
     }
-    .tile h4{
-      margin:0 0 8px;
-      font-size: 16px;
+    .tile::before{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background:
+        radial-gradient(340px 230px at 20% 12%, rgba(45,212,255,.26), transparent 55%),
+        radial-gradient(340px 230px at 82% 18%, rgba(249,115,22,.22), transparent 55%),
+        radial-gradient(340px 230px at 45% 92%, rgba(34,197,94,.18), transparent 55%);
+      opacity:.90;
+      pointer-events:none;
     }
-    .tile p{
-      margin:0;
-      color: var(--muted);
-      line-height:1.55;
-      font-size: 14px;
+    .tile > *{ position:relative; z-index:1; }
+    .tile:hover{
+      border-color: rgba(255,255,255,.30);
+      box-shadow: 0 28px 80px rgba(0,0,0,.38);
+    }
+    .tile h4{ margin:0 0 8px; font-size: 16px; }
+    .tile p{ margin:0; color: rgba(242,246,255,.80); line-height:1.6; font-size: 14px; }
+
+    /* Photos section parallax background */
+    .photos-section{
+      position:relative;
+      isolation:isolate;
+    }
+    .photos-bg{
+      position:absolute;
+      inset:0;
+      z-index:0;
+      overflow:hidden;
+    }
+    .photos-bg::before{
+      content:"";
+      position:absolute;
+      inset:-18%;
+      background-image:
+        linear-gradient(to bottom, rgba(11,18,48,.14), rgba(11,18,48,.74)),
+        url("https://commons.wikimedia.org/wiki/Special:FilePath/Glacier%20National%20Park%20Montana%20-%20Many%20Glacier%20Valley.jpg?width=2400");
+      background-size: cover;
+      background-position: center;
+      transform: translate3d(0, var(--pYphotos), 0) scale(1.18);
+      will-change: transform;
+      filter: saturate(1.10) contrast(1.06) brightness(1.08);
+    }
+    .photos-bg::after{
+      content:"";
+      position:absolute;
+      inset:-20%;
+      background:
+        radial-gradient(900px 650px at 25% 20%, rgba(45,212,255,.24), transparent 60%),
+        radial-gradient(900px 650px at 85% 25%, rgba(249,115,22,.22), transparent 60%),
+        radial-gradient(900px 650px at 60% 92%, rgba(34,197,94,.18), transparent 62%);
+      mix-blend-mode: screen;
+      opacity:.85;
+      pointer-events:none;
     }
 
-    /* Contact section */
-    .contact-wrap{
+    .photo-grid{
       display:grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.2fr .8fr;
       gap: 14px;
-      align-items:stretch;
     }
-    @media (max-width: 900px){
-      .contact-wrap{ grid-template-columns: 1fr; }
+    @media (max-width: 950px){
+      .photo-grid{ grid-template-columns: 1fr; }
     }
-    .contact-card{
-      padding: 22px;
+    .photo-card{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.22);
+      overflow:hidden;
+      box-shadow: 0 18px 60px rgba(0,0,0,.32);
+      background: rgba(255,255,255,.14);
+      transform-style: preserve-3d;
+      transition: transform .20s ease, border-color .20s ease, box-shadow .20s ease;
+      will-change: transform;
     }
-    .contact-row{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 12px;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--line);
+    .photo-card:hover{
+      border-color: rgba(255,255,255,.30);
+      box-shadow: 0 30px 95px rgba(0,0,0,.40);
     }
-    .contact-row:last-child{ border-bottom:0; }
-    .label{
-      color: rgba(233,238,252,.88);
-      font-weight:700;
+    .photo{
+      height: 320px;
+      background-size: cover;
+      background-position: center;
+      position:relative;
+    }
+    .photo::after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(to bottom, rgba(11,18,48,.06), rgba(11,18,48,.86));
+    }
+    .photo-body{ padding: 18px; }
+    .photo-body h3{
+      margin:0 0 8px;
+      font-size: 18px;
+      letter-spacing:-0.2px;
+    }
+    .photo-body p{
+      margin:0;
+      color: rgba(242,246,255,.78);
+      line-height:1.65;
       font-size: 14px;
-    }
-    .value{
-      color: var(--muted);
-      font-size: 14px;
-      text-align:right;
-      word-break: break-word;
     }
 
+    /* Services section: parallax vending machine background */
+    .services-section{
+      position:relative;
+      isolation:isolate;
+    }
+    .services-bg{
+      position:absolute;
+      inset:0;
+      z-index:0;
+      overflow:hidden;
+    }
+    .services-bg::before{
+      content:"";
+      position:absolute;
+      inset:-18%;
+      background-image:
+        linear-gradient(to bottom, rgba(11,18,48,.20), rgba(11,18,48,.82)),
+        url("https://commons.wikimedia.org/wiki/Special:FilePath/Vending%20Machines.jpg?width=2400");
+      background-size: cover;
+      background-position: center;
+      transform: translate3d(0, var(--pYservices), 0) scale(1.14);
+      will-change: transform;
+      filter: saturate(1.06) contrast(1.06) brightness(1.06);
+      opacity: .75; /* partial transparency background feel */
+    }
+    .services-bg::after{
+      content:"";
+      position:absolute;
+      inset:-20%;
+      background:
+        radial-gradient(900px 650px at 18% 20%, rgba(45,212,255,.20), transparent 62%),
+        radial-gradient(900px 650px at 82% 18%, rgba(249,115,22,.18), transparent 62%);
+      mix-blend-mode: screen;
+      opacity:.85;
+      pointer-events:none;
+    }
+
+    /* Scroll reveal */
+    .reveal{
+      opacity:0;
+      transform: translateY(16px) scale(.985);
+      filter: blur(3px);
+      transition: opacity .55s ease, transform .55s ease, filter .55s ease;
+    }
+    .reveal.in{
+      opacity:1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+
+    /* Tilt + lift */
+    .tilt{
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    /* Footer */
     .foot{
-      padding: 22px 18px 40px;
-      color: rgba(233,238,252,.55);
+      padding: 22px 18px 42px;
+      color: rgba(242,246,255,.62);
       text-align:center;
       font-size: 13px;
+      line-height:1.6;
+    }
+    .tiny{ color: rgba(242,246,255,.50); font-size: 12px; }
+
+    @media (prefers-reduced-motion: reduce){
+      .grain{ display:none; }
+      .reveal{ opacity:1; transform:none; filter:none; }
+      .logo::after{ animation:none; }
     }
   </style>
 </head>
 
 <body>
+  <div class="grain" aria-hidden="true"></div>
+
   <div class="nav">
     <div class="nav-inner">
       <div class="brand">
-        <div class="logo">KV</div>
-        <div>Kalispell Valley Co.</div>
+        <div class="logo" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 44L24.5 26.5L33 36L41.5 24L54 44H10Z" fill="rgba(242,246,255,.96)"/>
+            <path d="M12 46H52" stroke="rgba(242,246,255,.70)" stroke-width="3" stroke-linecap="round"/>
+            <rect x="27" y="40" width="10" height="12" rx="3" fill="url(#g)"/>
+            <rect x="29.5" y="42.5" width="5" height="2.5" rx="1.2" fill="rgba(10,16,36,.86)"/>
+            <defs>
+              <linearGradient id="g" x1="27" y1="40" x2="37" y2="52" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#2dd4ff"/>
+                <stop offset="1" stop-color="#f97316"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div>Montana Vending</div>
       </div>
+
       <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#why">Why Us</a>
+        <a href="#photos">Photos</a>
+        <a href="#services">Services</a>
         <a href="#contact">Contact</a>
       </div>
+
       <a class="btn btn-outline" href="#contact">Contact Us</a>
     </div>
   </div>
@@ -340,75 +606,117 @@
     <div class="parallax" aria-hidden="true"></div>
 
     <div class="hero-inner">
-      <div class="card hero-card">
-        <div class="kicker">Local • Reliable • Easy to Reach</div>
-        <h1>Run by local people in Kalispell, Montana and the Flathead Valley.</h1>
+      <div class="card hero-card reveal tilt">
+        <div class="kicker"><span class="dot"></span> Local • Kalispell, MT • Flathead Valley</div>
+        <h1>Vending machines that actually get stocked, cleaned, and serviced.</h1>
         <p class="lead">
-          We’re a small business built for real customers, not corporate nonsense.
-          If you need help, you can actually reach us, and we actually show up.
+          Montana Vending is run by local people in Kalispell and serving the Flathead Valley.
+          We place and manage snack and drink vending machines for businesses and high traffic locations.
+          Simple goal: keep machines full, working, and looking professional.
         </p>
 
         <div class="hero-actions">
-          <a class="btn" href="#contact">Contact Us</a>
-          <a class="btn btn-outline" href="#about">Learn More</a>
+          <a class="btn" href="#contact">Get a machine / Contact</a>
+          <a class="btn btn-outline" href="#services">What we offer</a>
         </div>
       </div>
 
-      <aside class="card trust">
-        <h3>Quick trust signals</h3>
-        <ul>
-          <li>Local operators serving the Flathead Valley</li>
-          <li>Fast responses and straightforward communication</li>
-          <li>Clear pricing and no surprises</li>
-        </ul>
+      <aside class="card hero-side reveal tilt">
+        <div class="stat">
+          <b>Placement + restocking</b>
+          <span>We handle the machine, product, and ongoing restock schedule.</span>
+        </div>
+        <div class="stat">
+          <b>Clean and maintained</b>
+          <span>Machines should look legit, not like a grimy box in a corner.</span>
+        </div>
+        <div class="stat">
+          <b>Product selection</b>
+          <span>Popular snacks, drinks, and options that fit the location.</span>
+        </div>
       </aside>
     </div>
   </header>
 
-  <section id="about">
+  <!-- SWAPPED: Photos section now comes before Services -->
+  <section id="photos" class="photos-section">
+    <div class="photos-bg" aria-hidden="true"></div>
     <div class="container">
-      <h2 class="section-title">About</h2>
-      <p class="section-sub">
-        This website exists for one reason: legitimacy and clarity. We’re local, we’re reachable, and we do what we say we’ll do.
-        As we grow, we’ll add service details and scheduling options here.
+      <h2 class="section-title reveal">Locations and setups</h2>
+      <p class="section-sub reveal">
+        Here’s the vibe: clean machines, good placement, and a setup that looks professional in the space.
+        We’ll update this section with our real machine and location photos as we install more placements.
       </p>
 
+      <div class="photo-grid">
+        <div class="photo-card reveal tilt">
+          <div class="photo" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Lake%20McDonald%2C%20Glacier%20National%20Park.jpg?width=2000');"></div>
+          <div class="photo-body">
+            <h3>Serving Northwest Montana</h3>
+            <p>Based in Kalispell and working across the Flathead Valley area.</p>
+          </div>
+        </div>
+
+        <div class="photo-card reveal tilt">
+          <div class="photo" style="height:200px;background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Kalispell%20Main%20Street.jpg?width=1600');"></div>
+          <div class="photo-body">
+            <h3>Local, reachable, straightforward</h3>
+            <p>If you call, you get a local person. Not a support maze.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="height:14px"></div>
+
       <div class="grid">
-        <div class="tile">
-          <h4>Local</h4>
-          <p>Based in Kalispell, serving the Flathead Valley. We’re not a call center. We’re right here.</p>
+        <div class="photo-card reveal tilt">
+          <div class="photo" style="height:220px;background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Vending%20Machines.jpg?width=1600');"></div>
+          <div class="photo-body">
+            <h3>Machines and layout</h3>
+            <p>We’ll swap these with your actual machine photos as soon as you have them.</p>
+          </div>
         </div>
-        <div class="tile">
-          <h4>Simple</h4>
-          <p>No complicated “funnels.” Just clear info, and an easy way to contact us.</p>
+
+        <div class="photo-card reveal tilt">
+          <div class="photo" style="height:220px;background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/US%202%20in%20Flathead%20County%20Montana.jpg?width=1600');"></div>
+          <div class="photo-body">
+            <h3>Flathead Valley</h3>
+            <p>A quick “we’re here” visual that matches the local claim.</p>
+          </div>
         </div>
-        <div class="tile">
-          <h4>Professional</h4>
-          <p>We show up on time, communicate clearly, and treat your time like it matters.</p>
+
+        <div class="photo-card reveal tilt">
+          <div class="photo" style="height:220px;background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Lake%20mcdonald%20in%20glacier%20national%20park%20Montana.jpg?width=1600');"></div>
+          <div class="photo-body">
+            <h3>Montana brand vibe</h3>
+            <p>Clean, sharp, and obviously Montana. That’s the point.</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="why">
+  <section id="services" class="services-section">
+    <div class="services-bg" aria-hidden="true"></div>
     <div class="container">
-      <h2 class="section-title">Why people choose us</h2>
-      <p class="section-sub">
-        If you’ve ever dealt with flaky service or vague promises, you already know why this matters.
+      <h2 class="section-title reveal">What we do</h2>
+      <p class="section-sub reveal">
+        We place vending machines, keep them stocked, and keep them working. If you’re a business owner,
+        a machine is an easy upgrade for employees and customers.
       </p>
 
       <div class="grid">
-        <div class="tile">
-          <h4>Fast contact</h4>
-          <p>Click the button, call, or email. No waiting days for a reply.</p>
+        <div class="tile reveal tilt">
+          <h4>Vending machine placement</h4>
+          <p>We evaluate the location, set up the machine, and make sure it fits the space and foot traffic.</p>
         </div>
-        <div class="tile">
-          <h4>Clear expectations</h4>
-          <p>We tell you what’s happening, what it costs, and what comes next.</p>
+        <div class="tile reveal tilt">
+          <h4>Restocking and product mix</h4>
+          <p>Snacks, drinks, and high sellers. We adjust the lineup based on what actually moves.</p>
         </div>
-        <div class="tile">
-          <h4>Built on reputation</h4>
-          <p>In a small community, your word matters. We protect ours.</p>
+        <div class="tile reveal tilt">
+          <h4>Service and reliability</h4>
+          <p>When something jams, breaks, or needs attention, it gets handled quickly.</p>
         </div>
       </div>
     </div>
@@ -416,62 +724,111 @@
 
   <section id="contact">
     <div class="container">
-      <h2 class="section-title">Contact</h2>
-      <p class="section-sub">
-        Reach out and we’ll get back to you. If it’s urgent, calling is fastest.
+      <h2 class="section-title reveal">Contact</h2>
+      <p class="section-sub reveal">
+        Want a machine at your business or location? Reach out. Calling is fastest.
       </p>
 
-      <div class="contact-wrap">
-        <div class="card contact-card">
-          <div class="contact-row">
-            <div class="label">Phone</div>
-            <div class="value"><a style="color:inherit" href="tel:+14062109837">(406) 210-9837</a></div>
+      <div class="contact-wrap" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+        <div class="card contact-card reveal tilt" style="padding:22px;">
+          <div style="display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid rgba(255,255,255,.18);">
+            <div style="font-weight:1000;">Phone</div>
+            <div style="color: rgba(242,246,255,.78);"><a href="tel:+14062109837">(406) 210-9837</a></div>
           </div>
-          <div class="contact-row">
-            <div class="label">Email</div>
-            <div class="value"><a style="color:inherit" href="mailto:hello@yourdomain.com">hello@yourdomain.com</a></div>
+          <div style="display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid rgba(255,255,255,.18);">
+            <div style="font-weight:1000;">Email</div>
+            <div style="color: rgba(242,246,255,.78);"><a href="mailto:miles.d.flake@gmail.com">miles.d.flake@gmail.com</a></div>
           </div>
-          <div class="contact-row">
-            <div class="label">Location</div>
-            <div class="value">Kalispell, MT • Flathead Valley</div>
+          <div style="display:flex; justify-content:space-between; padding:12px 0;">
+            <div style="font-weight:1000;">Location</div>
+            <div style="color: rgba(242,246,255,.78); text-align:right;">Kalispell, MT • Flathead Valley</div>
           </div>
 
           <div style="margin-top:16px; display:flex; gap:12px; flex-wrap:wrap;">
             <a class="btn" href="tel:+14062109837">Call Now</a>
-            <a class="btn btn-outline" href="mailto:hello@yourdomain.com">Email Us</a>
+            <a class="btn btn-outline" href="mailto:miles.d.flake@gmail.com">Email Us</a>
           </div>
         </div>
 
-        <div class="card contact-card">
-          <h3 style="margin:0 0 10px;">Message</h3>
-          <p style="margin:0 0 14px; color: var(--muted); line-height:1.6;">
-            If you want a simple contact form here, we can add one.
-            Since GitHub Pages is static hosting, forms work best through a free form backend (Netlify Forms, Formspree, etc.).
+        <div class="card contact-card reveal tilt" style="padding:22px;">
+          <h3 style="margin:0 0 10px; font-size:18px;">What to include when you reach out</h3>
+          <p style="margin:0; color: rgba(242,246,255,.78); line-height:1.65;">
+            Location address, hours, approximate foot traffic, and whether you want snacks, drinks, or both.
+            If you’re not sure, just send the address and we’ll figure it out.
           </p>
-          <a class="btn btn-outline" href="#top">Back to top</a>
+          <div style="margin-top:16px;">
+            <a class="btn btn-outline" href="#top">Back to top</a>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <div class="foot">
-    © <span id="year"></span> Kalispell Valley Co. • Built in the Flathead Valley
+    © <span id="year"></span> Montana Vending • Kalispell, Montana<br/>
+    <span class="tiny">
+      Temporary photo sources: Wikimedia Commons. We’ll replace these with our own machine and location photos.
+    </span>
   </div>
 
   <script>
-    // Parallax: background moves at a different speed than scroll.
-    // Smaller multiplier = slower background movement.
-    const parallaxLayer = document.querySelector(".parallax");
+    // Parallax layers
     const setParallax = () => {
       const y = window.scrollY || 0;
-      const offset = Math.round(y * -0.18); // tweak: -0.12 to -0.25 feels good
-      document.documentElement.style.setProperty("--pY", offset + "px");
+
+      // hero layers
+      const offset1 = Math.round(y * -0.56);
+      const offset2 = Math.round(y * -0.36);
+      document.documentElement.style.setProperty("--pY", offset1 + "px");
+      document.documentElement.style.setProperty("--pY2", offset2 + "px");
+
+      // photos parallax
+      const photosTop = document.getElementById("photos").offsetTop;
+      const offPhotos = Math.round((y - photosTop) * -0.24);
+      document.documentElement.style.setProperty("--pYphotos", offPhotos + "px");
+
+      // services parallax (vending machines background)
+      const servicesTop = document.getElementById("services").offsetTop;
+      const offServices = Math.round((y - servicesTop) * -0.20);
+      document.documentElement.style.setProperty("--pYservices", offServices + "px");
     };
     window.addEventListener("scroll", setParallax, { passive: true });
     setParallax();
 
     // Footer year
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Scroll reveal
+    const revealEls = Array.from(document.querySelectorAll(".reveal"));
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries){
+        if (e.isIntersecting){
+          e.target.classList.add("in");
+          io.unobserve(e.target);
+        }
+      }
+    }, { threshold: 0.14 });
+    revealEls.forEach(el => io.observe(el));
+
+    // Tilt + lift
+    const tiltEls = Array.from(document.querySelectorAll(".tilt"));
+    const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
+    tiltEls.forEach((el) => {
+      el.addEventListener("mousemove", (ev) => {
+        const r = el.getBoundingClientRect();
+        const px = (ev.clientX - r.left) / r.width;
+        const py = (ev.clientY - r.top) / r.height;
+
+        const ry = clamp((px - 0.5) * 10, -8, 8);
+        const rx = clamp((0.5 - py) * 8, -7, 7);
+
+        el.style.transform = `translateY(-3px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+      });
+
+      el.addEventListener("mouseleave", () => {
+        el.style.transform = "";
+      });
+    });
   </script>
 </body>
 </html>
